@@ -1,23 +1,27 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    standalone: false
+  selector: 'app-home',
+  imports: [],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  standalone: true
 })
 export class HomeComponent implements OnInit {
   private olympicUrl = './assets/mock/olympic.json';
   public pieChart!: Chart<"pie", number[], string>;
   public totalCountries: number = 0
   public totalJOs: number = 0
-  public error!:string
+  public error!: string
   titlePage: string = "Medals per Country";
 
-  constructor(private router: Router, private http:HttpClient) { }
+  // Prefer dependency injection over constructor
+  private router: Router = inject(Router);
+  private http: HttpClient = inject(HttpClient);
 
   ngOnInit() {
     this.http.get<any[]>(this.olympicUrl).pipe().subscribe(
@@ -32,7 +36,7 @@ export class HomeComponent implements OnInit {
           this.buildPieChart(countries, sumOfAllMedalsYears);
         }
       },
-      (error:HttpErrorResponse) => {
+      (error: HttpErrorResponse) => {
         console.log(`erreur : ${error}`);
         this.error = error.message
       }

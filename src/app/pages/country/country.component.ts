@@ -1,14 +1,15 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import Chart from 'chart.js/auto';
+import { inject } from '@angular/core';
 
 
 @Component({
-    selector: 'app-country',
-    templateUrl: './country.component.html',
-    styleUrls: ['./country.component.scss'],
-    standalone: false
+  selector: 'app-country',
+  templateUrl: './country.component.html',
+  styleUrls: ['./country.component.scss'],
+  standalone: true
 })
 export class CountryComponent implements OnInit {
   private olympicUrl = './assets/mock/olympic.json';
@@ -19,8 +20,9 @@ export class CountryComponent implements OnInit {
   public totalAthletes: number = 0;
   public error!: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
-  }
+  // Prefer dependency injection over constructor
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private http: HttpClient = inject(HttpClient);
 
   ngOnInit() {
     let countryName: string | null = null
