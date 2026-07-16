@@ -398,6 +398,7 @@ Prettier agit en complément d'ESLint :
 ### 3.3. Bénéfices pour l'équipe
 
 L'association d'ESLint et Prettier permet de mettre en place une base de développement plus fiable :
+
 - un code plus homogène et plus facile à maintenir ;
 - des erreurs détectées plus tôt dans le cycle de développement ;
 - des revues de code plus efficaces, centrées sur la logique métier plutôt que sur le style ;
@@ -452,14 +453,26 @@ Idéal pour l'évolution future (coller a l'architecture naturelle modulaire d'A
 ```text
 src
 ├── app
-│   ├── core
-│   │   ├── components
-│   │   │   ├── header
-│   │   │   └── not-found
-│   │   ├── models
-│   │   └── services
+│   ├── components
+│   │   ├── header
+│   │   │   ├── header.component.html
+│   │   │   ├── header.component.scss
+│   │   │   └── header.component.ts
+│   │   ├── chart
+│   │   │   ├── chart.component.html
+│   │   │   ├── chart.component.scss
+│   │   │   └── chart.component.ts
+│   │   └── not-found
+│   │       ├── not-found.component.html
+│   │       ├── not-found.component.scss
+│   │       └── not-found.component.ts
+│   ├── models
+│   │   ├──
+│   │   └──
+│   ├── services
+│   │   └──
 │   │
-│   ├── pages (ou features)
+│   ├── pages
 │   │   ├── home
 │   │   │   ├── components
 │   │   │   ├── home.component.ts
@@ -470,7 +483,7 @@ src
 │   │   ├── country
 │   │   │   ├── components
 │   │   │   │   ├── country-card
-│   │   │   │   └── participation-chart
+│   │   │   │   ├── participation-chart
 │   │   │   │   └── country-header
 │   │   │   ├── country.component.ts
 │   │   │   ├── country.component.html
