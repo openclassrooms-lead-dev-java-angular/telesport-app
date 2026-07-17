@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+// color theme
+$primary-color: #0b868f;
+
+// text color theme
+$text-primary-color: white;
+
+// margins paddings
+$padding: 10px;
+
+// borders
+$border-radius: 10px;
+
+// old styles
 .heading {
     flex-direction: column;
 }
@@ -41,4 +54,3 @@
         }
     }
 }
-
