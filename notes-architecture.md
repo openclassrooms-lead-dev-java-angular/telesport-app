@@ -453,43 +453,59 @@ Idéal pour l'évolution future (coller a l'architecture naturelle modulaire d'A
 ```text
 src
 ├── app
-│   ├── components
-│   │   ├── header
-│   │   │   ├── header.component.html
-│   │   │   ├── header.component.scss
-│   │   │   └── header.component.ts
-│   │   ├── chart
-│   │   │   ├── chart.component.html
-│   │   │   ├── chart.component.scss
-│   │   │   └── chart.component.ts
-│   │   └── not-found
-│   │       ├── not-found.component.html
-│   │       ├── not-found.component.scss
-│   │       └── not-found.component.ts
-│   ├── models
-│   │   ├──
-│   │   └──
-│   ├── services
-│   │   └──
+│   ├── core
+│   │   ├── models
+│   │   │   ├── olympic.model.ts
+│   │   │   └── participation.model.ts
+│   │   │
+│   │   └── services
+│   │       └── olympic.service.ts
 │   │
-│   ├── pages
+│   ├── shared
+│   │   └── components
+│   │       ├── header
+│   │       │   ├── header.component.ts
+│   │       │   ├── header.component.html
+│   │       │   └── header.component.scss
+│   │       │
+│   │       ├── page-title
+│   │       │   ├── page-title.component.ts
+│   │       │   ├── page-title.component.html
+│   │       │   └── page-title.component.scss
+│   │       │
+│   │       ├── statistic-card
+│   │       │   ├── statistic-card.component.ts
+│   │       │   ├── statistic-card.component.html
+│   │       │   └── statistic-card.component.scss
+│   │       │
+│   │       ├── pie-chart
+│   │       │   ├── pie-chart.component.ts
+│   │       │   ├── pie-chart.component.html
+│   │       │   └── pie-chart.component.scss
+│   │       │
+│   │       └── line-chart
+│   │           ├── line-chart.component.ts
+│   │           ├── line-chart.component.html
+│   │           └── line-chart.component.scss
+│   │
+│   ├── feature
 │   │   ├── home
-│   │   │   ├── components
 │   │   │   ├── home.component.ts
 │   │   │   ├── home.component.html
 │   │   │   ├── home.component.scss
 │   │   │   └── home.routes.ts
 │   │   │
 │   │   ├── country
-│   │   │   ├── components
-│   │   │   │   ├── country-card
-│   │   │   │   ├── participation-chart
-│   │   │   │   └── country-header
 │   │   │   ├── country.component.ts
 │   │   │   ├── country.component.html
 │   │   │   ├── country.component.scss
 │   │   │   └── country.routes.ts
-│   │
+│   │   │
+│   │   └── not-found
+│   │       ├── not-found.component.ts
+│   │       ├── not-found.component.html
+│   │       ├── not-found.component.scss
+│   │       └── not-found.routes.ts
 │   ├── app.component.ts
 │   ├── app.component.html
 │   ├── app.component.scss
@@ -512,8 +528,57 @@ src
 └── test.ts
 ```
 
-Vu qu'un refactor est organisé, pourquoi ne pas partir d'une page blanche et porter ce qui est actuellement fait dans une architecture modulaire sur la dernière version lts d'Angular.
-Tant qu'il n'y a pas beaucoup de code c'est faisable proprement sans organiser de migration qui prendraient beaucoup trop de temps.
+Pourquoi cette architecture ?
+
+`core/`
+
+Contient tout ce qui est singleton dans l'application :
+
+- services métier ;
+- modèles communs ;
+- interceptors (futur)
+- guards (futur)
+- configuration.
+
+Il n'y a généralement qu'une seule instance de ces éléments.
+
+`shared/`
+
+Contient les composants réutilisables.
+
+`features/`
+
+Chaque dossier représente un domaine fonctionnel.
+
+Chaque feature possède :
+
+- ses routes ;
+- ses pages ;
+- éventuellement ses composants spécifiques ;
+- ses services spécifiques si nécessaire.
+
+C'est ce qui facilite le lazy loading.
+
+### Evolution possible
+
+Si le projet venait à prendre de l'ampleur, nous pourrions faire évoluer chaque feature ainsi :
+
+```text
+features
+└── country
+    ├── components
+    │   ├── country-header
+    │   └── participation-table
+    │
+    ├── services
+    │
+    ├── models
+    │
+    ├── country.component.ts
+    └── country.routes.ts
+```
+
+Cela permet de conserver tout ce qui concerne une fonctionnalité au même endroit.
 
 ## 4 Upgrade socle applicatif
 
