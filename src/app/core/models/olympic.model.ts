@@ -3,7 +3,7 @@
 import { Participation } from "./participation.model";
 
 export class Olympic {
-    id!: number;
-    country!: string;
-    participations!: Participation[];
+    id: number = 0;
+    country: string = '';
+    participations: Participation[] = [];
 }

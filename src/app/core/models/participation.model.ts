@@ -2,9 +2,9 @@
 
 
 export class Participation {
-    id!: number;
-    year!: number;
-    cit!: string;
-    medalsCount!: number;
-    athleteCount!: number;
+    id: number = 0;
+    year: number = 0;
+    cit: string = '';
+    medalsCount: number = 0;
+    athleteCount: number = 0;
 }
