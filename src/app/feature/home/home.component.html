@@ -2,4 +2,9 @@
     <div class="center">
         <app-page-title [title]="pageTitle" />
     </div>
+
+    <div class="split">
+        <app-statistic-card [cardTitle]="'Number of countries'" [cardValue]="totalCountries()" />
+        <app-statistic-card [cardTitle]="'Number of JOs'" [cardValue]="totalCountries()" />
+    </div>
 </div>
