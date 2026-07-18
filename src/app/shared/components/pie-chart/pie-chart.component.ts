@@ -48,7 +48,9 @@ export class PieChartComponent implements OnDestroy {
                 ]
             },
             options: {
-                aspectRatio: 2.5,
+                aspectRatio: this.getAspectRatio(),
+                responsive: true,
+                maintainAspectRatio: true,
                 onClick: (e) => {
                     if (e.native) {
                         const points = this.pieChart.getElementsAtEventForMode(e.native, 'point', { intersect: true }, true)
@@ -61,6 +63,18 @@ export class PieChartComponent implements OnDestroy {
                 }
             }
         });
+    }
+
+    getAspectRatio(): number {
+        if (window.innerWidth <= 767) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 1199) {
+            return 1.25;
+        }
+
+        return 2.5;
     }
 
     ngOnDestroy(): void {

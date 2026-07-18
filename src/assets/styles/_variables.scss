@@ -1,0 +1,26 @@
+// grid system
+$grid-desktop-columns: 12;
+$grid-tablet-columns: 8;
+$grid-mobile-columns: 4;
+
+$breakpoint-tablet: 1199px;
+$breakpoint-mobile: 767px;
+
+$spacing-default: 24px;
+
+// color theme
+$primary-color: #0b868f;
+
+// text color theme
+$text-primary-color: white;
+$text-secondary-color: gray;
+
+// margins paddings
+$padding: 10px;
+
+// borders
+$border-radius: 10px;
+
+// media queries
+$app-mobile: 767px;
+$app-tablet: 1199px;
