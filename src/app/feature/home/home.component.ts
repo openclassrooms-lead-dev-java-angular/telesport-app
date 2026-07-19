@@ -7,6 +7,7 @@ import { PageTitleComponent } from "src/app/shared/components/page-title/page-ti
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
 import { ChartData } from 'src/app/core/models/chart-data.model';
 import { PieChartComponent } from 'src/app/shared/components/pie-chart/pie-chart.component';
+import { Participation } from 'src/app/core/models/participation.model';
 
 @Component({
     selector: 'app-home',
@@ -52,15 +53,15 @@ export class HomeComponent implements OnInit {
         this.totalCountries.set(data.length);
         this.totalJOs.set(
             Array.from(
-                new Set(data.map((i: any) => i.participations.map((f: any) => f.year)).flat())
+                new Set(data.map((i: Olympic) => i.participations.map((f: Participation) => f.year)).flat())
             ).length
         );
     }
 
     buildPieChart(data: Olympic[]) {
-        const countries: string[] = data.map((i: any) => i.country);
-        const medals = data.map((i: any) => i.participations.map((i: any) => (i.medalsCount)));
-        const sumOfAllMedalsYears = medals.map((i) => i.reduce((acc: any, i: any) => acc + i, 0));
+        const countries: string[] = data.map((i: Olympic) => i.country);
+        const medals: number[][] = data.map((i: Olympic) => i.participations.map((i: Participation) => (i.medalsCount)));
+        const sumOfAllMedalsYears = medals.map((i) => i.reduce((acc: number, i: number) => acc + i, 0));
 
         this.chartData.set({
             labels: countries,
