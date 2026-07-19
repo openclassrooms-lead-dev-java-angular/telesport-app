@@ -1,0 +1,16 @@
+<section>
+    <div class="center">
+        <app-page-title [title]="pageTitle" />
+    </div>
+
+    <div class="home__stats">
+        <app-statistic-card [cardTitle]="'Number of countries'" [cardValue]="totalCountries()" />
+        <app-statistic-card [cardTitle]="'Number of JOs'" [cardValue]="totalCountries()" />
+    </div>
+
+    <div class="home__chart">
+        @if (chartData().labels.length > 0) {
+            <app-pie-chart [data]="chartData()" (onClick)="navigateToCountry($event)" />
+        }
+    </div>
+</section>
