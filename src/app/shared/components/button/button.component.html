@@ -1,0 +1,11 @@
+<button
+    [routerLink]="link()"
+    class="button"
+    [class.button--outlined]="outlined()"
+    [class.button--small]="size() === 'sm'"
+    [class.button--large]="size() === 'lg'"
+    [class.button--primary]="variant() === 'primary'"
+    [class.button--secondary]="variant() === 'secondary'"
+    >
+    <ng-content></ng-content>
+</button>
