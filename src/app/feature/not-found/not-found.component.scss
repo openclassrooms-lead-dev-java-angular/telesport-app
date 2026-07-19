@@ -6,7 +6,7 @@
     height: 100vh;
 
     @media screen and (max-width: 1000px) {
-        display: block;
-        margin-top: 40px 20px 20px 0;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 }
