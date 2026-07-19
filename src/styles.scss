@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'src/assets/styles/_variables.scss' as *;
+
+
+// old styles
 .heading {
     flex-direction: column;
 }
@@ -41,4 +44,3 @@
         }
     }
 }
-

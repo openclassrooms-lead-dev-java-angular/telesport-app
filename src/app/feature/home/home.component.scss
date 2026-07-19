@@ -1,0 +1,36 @@
+.home {
+    display: contents;
+
+    &__title {
+        grid-column: span 12;
+    }
+
+    &__stats {
+        grid-column: span 4;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    &__chart {
+        grid-column: span 12;
+    }
+
+    @media (max-width: 1199px) {
+        &__title,
+        &__stats,
+        &__chart {
+            grid-column: span 8;
+        }
+    }
+
+    @media (max-width: 767px) {
+        &__title,
+        &__stats,
+        &__chart {
+            grid-column: span 4;
+        }
+    }
+}
