@@ -1,4 +1,4 @@
-@use 'src/assets/styles/_variables.scss' as *;
+@use '../../../../styles/variables' as *;
 
 .card {
     text-align: center;
@@ -6,10 +6,10 @@
     border-radius: 10px;
     padding: $padding;
     margin: 2px 0;
-    color: $text-secondary-color;
 
     &-title {
         margin: 2px 0;
+        color: $text-gray-color;
     }
 
     &-value {

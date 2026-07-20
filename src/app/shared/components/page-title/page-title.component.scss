@@ -1,3 +1,5 @@
+@use '../../../../styles/variables' as *;
+
 div {
     background: $primary-color;
     padding: $padding;
