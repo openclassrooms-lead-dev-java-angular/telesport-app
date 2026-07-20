@@ -1,0 +1,47 @@
+.country {
+    display: contents;
+
+    &__title {
+        display: flex;
+        justify-content: center;
+
+        margin-bottom: 5px;
+    }
+
+    &__stats {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    &__chart {
+        display: flex;
+        justify-content: center;
+
+        app-chart {
+            width: 50%;
+        }
+    }
+
+    &__link {
+        display: flex;
+        justify-content: center;
+    }
+
+    @media (max-width: 1199px) {
+        &__title,
+        &__stats,
+        &__chart {
+            grid-column: span 8;
+        }
+    }
+
+    @media (max-width: 767px) {
+        &__title,
+        &__stats,
+        &__chart {
+            grid-column: span 4;
+        }
+    }
+}

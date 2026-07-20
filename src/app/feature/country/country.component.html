@@ -1,0 +1,21 @@
+<section class="country">
+    <div class="country__title">
+        <app-page-title [title]="pageTitle" />
+    </div>
+
+    <div class="country__stats">
+        @for (stats of statsList(); track stats.title) {
+            <app-statistic-card [cardTitle]="stats.title" [cardValue]="stats.value" />
+        }
+    </div>
+
+    <div class="country__chart">
+        @if (chartData().labels.length > 0) {
+            <app-chart [data]="chartData()" />
+        }
+    </div>
+
+    <div class="country__link">
+        <app-button link="/">Go back</app-button>
+    </div>
+</section>
