@@ -5,16 +5,17 @@ import { Olympic } from 'src/app/core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { PageTitleComponent } from "src/app/shared/components/page-title/page-title.component";
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
-import { ChartData } from 'src/app/core/models/chart-data.model';
-import { PieChartComponent } from 'src/app/shared/components/pie-chart/pie-chart.component';
+import { PieChartData } from 'src/app/core/models/chart-data.model';
 import { Participation } from 'src/app/core/models/participation.model';
+import { ChartType } from 'src/app/core/enums/chart-type.enum';
+import { ChartComponent } from 'src/app/shared/components/chart/chart.component';
 
 @Component({
     selector: 'app-home',
     imports: [
         PageTitleComponent,
         StatisticCardComponent,
-        PieChartComponent,
+        ChartComponent,
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
     protected pageTitle: string = "Medals per Country";
     protected totalJOs = signal(0);
     protected totalCountries = signal(0);
-    protected chartData = signal<ChartData>({
+    protected chartData = signal<PieChartData>({
+        type: ChartType.PIE,
         labels: [],
         datasets: [{
             label: '',
@@ -64,13 +66,19 @@ export class HomeComponent implements OnInit {
         const sumOfAllMedalsYears = medals.map((i) => i.reduce((acc: number, i: number) => acc + i, 0));
 
         this.chartData.set({
+            type: ChartType.PIE,
             labels: countries,
             datasets: [{
                 label: 'Medals',
                 data: sumOfAllMedalsYears,
                 backgroundColor: ['#0b868f', '#adc3de', '#7a3c53', '#8f6263', 'orange', '#94819d'],
                 hoverOffset: 4
-            }]
+            }],
+            responsiveRatio: {
+                sm: 1.5,
+                md: 1.5,
+                lg: 2.5
+            }
         })
     }
 
