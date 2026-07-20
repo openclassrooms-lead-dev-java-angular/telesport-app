@@ -46,8 +46,7 @@ export class ChartComponent implements OnDestroy {
                 maintainAspectRatio: true,
             }
         });
-        console.log(this.canvas.nativeElement.clientWidth);
-        console.log(this.canvas.nativeElement.clientHeight);
+        
         if (this.onClick) {
             this.chart.options.onClick = (e) => {
                 if (e.native) {

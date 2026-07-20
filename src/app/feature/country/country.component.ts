@@ -88,7 +88,7 @@ export class CountryComponent implements OnInit {
         this.stats.entries.value = country.participations.length ?? 0;
 
         this.stats.medals.value = this.medals.reduce((acc: number, item: number) => acc + item, 0);
-        console.log(Object.values(this.stats));
+        
         const nbAthletes: number[] = country.participations.map((i: Participation) => i.athleteCount);
         this.stats.athletes.value = nbAthletes.reduce((acc: number, item: number) => acc + item, 0);
     }
