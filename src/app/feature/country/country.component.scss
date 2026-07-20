@@ -1,6 +1,14 @@
 .country {
     display: contents;
 
+    &__error {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        font-size: 1.2rem;
+        color: rgb(170, 19, 19);
+    }
+
     &__title {
         display: flex;
         justify-content: center;
@@ -34,6 +42,10 @@
         &__stats,
         &__chart {
             grid-column: span 8;
+
+            app-chart {
+                width: 80%;
+            }
         }
     }
 
@@ -42,6 +54,10 @@
         &__stats,
         &__chart {
             grid-column: span 4;
+
+            app-chart {
+                width: 90%;
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ export class CountryComponent implements OnInit {
         }
     };
     private medals: number[] = [];
-    public error!: string;
+    public error = signal('');
     protected chartData = signal<LineChartData>({
         type: ChartType.LINE,
         labels: [],
@@ -67,14 +67,16 @@ export class CountryComponent implements OnInit {
         this.route.paramMap.subscribe((param: ParamMap) => countryName = param.get('countryName'));
 
         if (!countryName) {
-            throw new Error('Country name not found');
+            this.error.set('Sory, no country name no stats.');
+            return;
         }
 
         this.olympicService.fetchOlympics().subscribe(data => {
             const selectedCountry = data.find((olympic: Olympic) => olympic.country === countryName);
 
             if (!selectedCountry) {
-                throw new Error('Country not found');
+                this.error.set(`Sory but country "${countryName}" does not exists in our database.`);
+                return;
             }
 
             this.updateStatistics(selectedCountry);
@@ -88,7 +90,7 @@ export class CountryComponent implements OnInit {
         this.stats.entries.value = country.participations.length ?? 0;
 
         this.stats.medals.value = this.medals.reduce((acc: number, item: number) => acc + item, 0);
-        
+
         const nbAthletes: number[] = country.participations.map((i: Participation) => i.athleteCount);
         this.stats.athletes.value = nbAthletes.reduce((acc: number, item: number) => acc + item, 0);
     }
@@ -107,8 +109,8 @@ export class CountryComponent implements OnInit {
                 },
             ],
             responsiveRatio: {
-                sm: 1.5,
-                md: 1,
+                sm: 2,
+                md: 2,
                 lg: 2.5
             }
         })
