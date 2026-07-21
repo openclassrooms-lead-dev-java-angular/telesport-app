@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  envName: 'development',
-  OLYMPIC_URL: 'assets/mock/olympic.json'
+    production: false,
+    envName: 'development',
+    OLYMPIC_URL: 'assets/mock/olympic.json',
 };
 
 /*

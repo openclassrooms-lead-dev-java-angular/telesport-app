@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideClientHydration(withEventReplay()),
         provideHttpClient(),
-        { provide: LOCALE_ID, useValue: 'en-EN' }
-    ]
+        { provide: LOCALE_ID, useValue: 'en-EN' },
+    ],
 };

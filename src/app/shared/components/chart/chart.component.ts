@@ -1,4 +1,12 @@
-import { afterNextRender, Component, ElementRef, input, OnDestroy, output, ViewChild } from '@angular/core';
+import {
+    afterNextRender,
+    Component,
+    ElementRef,
+    input,
+    OnDestroy,
+    output,
+    ViewChild,
+} from '@angular/core';
 import { ChartData, ResponsiveChartRatio } from 'src/app/core/models/chart-data.model';
 import { ChartType } from 'src/app/core/enums/chart-type.enum';
 import Chart from 'chart.js/auto';
@@ -10,13 +18,12 @@ import Chart from 'chart.js/auto';
     styleUrl: './chart.component.scss',
 })
 export class ChartComponent implements OnDestroy {
-
     // properties
     data = input.required<ChartData>();
     clicked = output<string>();
 
     // attributes
-    private chart!: Chart<ChartType, number[], string>
+    private chart!: Chart<ChartType, number[], string>;
 
     @ViewChild('Chart')
     private canvas!: ElementRef<HTMLCanvasElement>;
@@ -28,13 +35,11 @@ export class ChartComponent implements OnDestroy {
     }
 
     createChart(): void {
-
         if (!this.canvas) {
-            return
+            return;
         }
 
-        this.chart = new Chart(
-            this.canvas.nativeElement, {
+        this.chart = new Chart(this.canvas.nativeElement, {
             type: this.data().type,
             data: {
                 labels: this.data().labels,
@@ -44,20 +49,25 @@ export class ChartComponent implements OnDestroy {
                 aspectRatio: this.getAspectRatio(this.data().responsiveRatio),
                 responsive: true,
                 maintainAspectRatio: true,
-            }
+            },
         });
 
         if (this.clicked) {
             this.chart.options.onClick = (e) => {
                 if (e.native) {
-                    const points = this.chart.getElementsAtEventForMode(e.native, 'point', { intersect: true }, true)
+                    const points = this.chart.getElementsAtEventForMode(
+                        e.native,
+                        'point',
+                        { intersect: true },
+                        true
+                    );
                     if (points?.length) {
                         const firstPoint = points[0];
                         const label = this.chart.data.labels?.[firstPoint.index] as string;
                         this.clicked.emit(label);
                     }
                 }
-            }
+            };
         }
     }
 

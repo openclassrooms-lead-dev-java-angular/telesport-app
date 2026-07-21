@@ -13,13 +13,9 @@ interface BaseChartData<T extends BaseChartDataset> {
     responsiveRatio?: ResponsiveChartRatio;
 }
 
-export type ChartData =
-    | PieChartData
-    | LineChartData;
+export type ChartData = PieChartData | LineChartData;
 
-export type ChartDataset =
-    | PieChartDataset
-    | LineChartDataset
+export type ChartDataset = PieChartDataset | LineChartDataset;
 
 // Pie chart
 export interface PieChartDataset extends BaseChartDataset {
