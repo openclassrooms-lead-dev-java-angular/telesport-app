@@ -29,7 +29,7 @@ import { SpinnerComponent } from "src/app/shared/components/spinner/spinner.comp
 export class CountryComponent implements OnInit {
 
     // attributes
-    public pageTitle: string = '';
+    public pageTitle = '';
     private stats: CountryStats = {
         entries: {
             title: 'Number of entries',

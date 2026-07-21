@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize, Observable } from 'rxjs';
+import { finalize } from 'rxjs';
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { PageTitleComponent } from "src/app/shared/components/page-title/page-title.component";
@@ -24,7 +24,7 @@ import { SpinnerComponent } from "src/app/shared/components/spinner/spinner.comp
 })
 export class HomeComponent implements OnInit {
     // attributes
-    protected pageTitle: string = "Medals per Country";
+    protected pageTitle = "Medals per Country";
     protected totalJOs = signal(0);
     protected totalCountries = signal(0);
     protected chartData = signal<PieChartData>({

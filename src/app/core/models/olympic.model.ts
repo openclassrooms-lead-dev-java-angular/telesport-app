@@ -2,8 +2,8 @@
 
 import { Participation } from "./participation.model";
 
-export class Olympic {
-    id: number = 0;
-    country: string = '';
-    participations: Participation[] = [];
+export interface Olympic {
+    id: number;
+    country: string;
+    participations: Participation[];
 }

@@ -4,7 +4,6 @@
             <div class="home__error">
                 {{ error() }}
             </div>
-
         } @else {
             <div class="center">
                 <app-page-title [title]="pageTitle" />
@@ -20,7 +19,7 @@
 
             <div class="home__chart">
                 @if (chartData().labels.length > 0) {
-                    <app-chart [data]="chartData()" (onClick)="navigateToCountry($event)" />
+                    <app-chart [data]="chartData()" (clicked)="navigateToCountry($event)" />
                 }
             </div>
         }

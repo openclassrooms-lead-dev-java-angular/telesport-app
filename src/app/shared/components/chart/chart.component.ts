@@ -13,7 +13,7 @@ export class ChartComponent implements OnDestroy {
 
     // properties
     data = input.required<ChartData>();
-    onClick = output<string>();
+    clicked = output<string>();
 
     // attributes
     private chart!: Chart<ChartType, number[], string>
@@ -46,15 +46,15 @@ export class ChartComponent implements OnDestroy {
                 maintainAspectRatio: true,
             }
         });
-        
-        if (this.onClick) {
+
+        if (this.clicked) {
             this.chart.options.onClick = (e) => {
                 if (e.native) {
                     const points = this.chart.getElementsAtEventForMode(e.native, 'point', { intersect: true }, true)
                     if (points?.length) {
                         const firstPoint = points[0];
                         const label = this.chart.data.labels?.[firstPoint.index] as string;
-                        this.onClick.emit(label);
+                        this.clicked.emit(label);
                     }
                 }
             }
