@@ -2,10 +2,6 @@
 
 An Angular application for viewing and comparing Olympic performance data.
 
-# Télésport Olympic Game Application
-
-An Angular application for viewing and comparing Olympic performance data.
-
 ## Summary
 
 1. [Technologies](#technologies)
@@ -116,30 +112,18 @@ For the project architecture, please refer to the file describing the [architect
 
 ### Home page
 
-- desktop
+![Desktop](./screenshots/readme/home-desktop.png)
 
-![Description de l'image](chemin/vers/image.png)
-
-- mobile
-
-![Description de l'image](chemin/vers/image.png)
+![Mobile](./screenshots/readme/home-mobile.png)
 
 ### Country page
 
-- desktop
+![Desktop](./screenshots/readme/country-desktop.png)
 
-![Description de l'image](chemin/vers/image.png)
-
-- mobile
-
-![Description de l'image](chemin/vers/image.png)
+![Mobile](./screenshots/readme/country-mobile.png)
 
 ### 404 page
 
-- desktop
+![Desktop](./screenshots/readme/404-desktop.png)
 
-![Description de l'image](chemin/vers/image.png)
-
-- mobile
-
-![Description de l'image](chemin/vers/image.png)
+![Mobile](./screenshots/readme/404-mobile.png)
