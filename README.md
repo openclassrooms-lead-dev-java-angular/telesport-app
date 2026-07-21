@@ -1,29 +1,145 @@
-# OlympicGamesStarter
+# Télésport Olympic Game Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+An Angular application for viewing and comparing Olympic performance data.
 
-Don't forget to install your node_modules before starting (`npm install`).
+# Télésport Olympic Game Application
 
-## Development server
+An Angular application for viewing and comparing Olympic performance data.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Summary
 
-## Build
+1. [Technologies](#technologies)
+2. [Launch application](#launch-application)
+3. [Code Quality](#code-quality)
+4. [Architecture](#architecture)
+5. [Screenshots](#screenshots)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Where to start
+## Technologies
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+- Angular 21.2
+- TypeScript
+- SCSS
+- Chart.js
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+---
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+## Launch application
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+### App installation
 
-You're now ready to implement the requested features.
+```bash
+npm install
+```
 
-Good luck!
+## Launch app
+
+```bash
+npm run start
+```
+
+## Code Quality
+
+The project uses linting and formatting tools to ensure clean, consistent, and maintainable code.
+
+### Angular Lint
+
+Angular provides linting capabilities to detect code quality issues and enforce best practices.
+
+Run Angular lint:
+
+```bash
+ng lint
+```
+
+### ESLint
+
+ESLint is used to analyze TypeScript and Angular code.
+
+Available commands:
+
+#### Check code quality:
+
+```bash
+ng lint
+# or
+eslint .
+```
+
+#### Automatically fix lint issues:
+
+```bash
+npm run lint:fix
+
+# or
+
+eslint . --fix
+```
+
+### Prettier
+
+Prettier is used to automatically format the code and maintain consistent styling.
+
+Available commands:
+
+#### Format the project
+
+```bash
+npm run format
+
+# or
+
+prettier . --write
+```
+
+#### Check formatting without modifying files
+
+```bash
+npm run format:check
+# or
+prettier . --check
+```
+
+## Architecture
+
+```text
+src/app
+├── core
+├── shared
+├── feature
+```
+
+For the project architecture, please refer to the file describing the [architecture](ARCHITECTURE.md)
+
+## Screenshots
+
+### Home page
+
+- desktop
+
+![Description de l'image](chemin/vers/image.png)
+
+- mobile
+
+![Description de l'image](chemin/vers/image.png)
+
+### Country page
+
+- desktop
+
+![Description de l'image](chemin/vers/image.png)
+
+- mobile
+
+![Description de l'image](chemin/vers/image.png)
+
+### 404 page
+
+- desktop
+
+![Description de l'image](chemin/vers/image.png)
+
+- mobile
+
+![Description de l'image](chemin/vers/image.png)
