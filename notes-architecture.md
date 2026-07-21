@@ -96,23 +96,6 @@ Elles doivent être déplacées dans les fichiers environment afin de :
 - éviter les modifications de code lors des déploiements ;
 - centraliser la configuration applicative.
 
-##### Suppression de polyfills.ts
-
-Le fichier :
-
-```bash
-src/polyfills.ts
-```
-
-n'est plus nécessaire dans une application Angular moderne (Angular 17+ et versions futures)
-dans la majorité des cas.
-
-Angular gère désormais nativement les besoins de compatibilité via la configuration moderne du
-build et du navigateur cible (browserslist).
-
-La suppression de ce fichier permet de simplifier la structure du projet et d'éviter de maintenir
-des dépendances historiques inutiles.
-
 #### Synthèse
 
 La refactorisation proposée vise à rapprocher l'application des standards Angular actuels :
@@ -135,7 +118,6 @@ Les tests ont également révélé un manque d'alignement entre les fichiers de 
 La présence de nombreux `console.log` dans le code montre également un manque de nettoyage avant validation. Ces traces doivent être supprimées pour éviter du bruit lors des phases de debug et garantir une meilleure qualité du code livré.
 
 La correction de ces points passe par un typage strict des données manipulées, la suppression des éléments temporaires de développement et la maintenance régulière des tests afin d'accompagner l'évolution de l'application.
-
 
 ### 3. UI
 
@@ -502,7 +484,7 @@ src
 ├── favicon.ico
 ├── index.html
 ├── main.ts
-├── polyfills.ts (remove)
+├── polyfills.ts
 ├── styles.scss
 └── test.ts
 ```
