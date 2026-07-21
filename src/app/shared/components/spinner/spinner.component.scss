@@ -1,0 +1,47 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 70px;
+    height: 70px;
+
+    border: 8px solid transparent;
+    border-top: 8px solid #01a1e9;
+    border-right: 8px solid #01a1e9;
+
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+
+    transition:
+        border-top-color 0.25s ease,
+        border-right-color 0.25s ease;
+}
+
+.spinner {
+    border-right-color: inherit;
+}
+
+.spinner {
+    border-right-color: currentColor;
+}
+
+
+.spinner {
+    --spinner-color: #01a1e9;
+    border-top-color: var(--spinner-color);
+    border-right-color: var(--spinner-color);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
