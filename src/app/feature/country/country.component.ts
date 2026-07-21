@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { Participation } from 'src/app/core/models/participation.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -64,16 +64,17 @@ export class CountryComponent implements OnInit {
     public isLoading = signal(true);
 
     // constructors
-    private route: ActivatedRoute = inject(ActivatedRoute);
     private olympicService = inject(OlympicService);
+    private route: ActivatedRoute = inject(ActivatedRoute);
+    private router = inject(Router);
 
     ngOnInit(): void {
-        let countryName: string | null = null;
+        let countryId: number | null = null;
         this.route.paramMap.subscribe(
-            (param: ParamMap) => (countryName = param.get('countryName'))
+            (param: ParamMap) => (countryId = parseInt(param.get('countryId') || '0'))
         );
 
-        if (!countryName) {
+        if (!countryId) {
             this.error.set('Sory, no country name no stats.');
             return;
         }
@@ -88,13 +89,11 @@ export class CountryComponent implements OnInit {
             .subscribe({
                 next: (data) => {
                     const selectedCountry = data.find(
-                        (olympic: Olympic) => olympic.country === countryName
+                        (olympic: Olympic) => olympic.id === countryId
                     );
 
                     if (!selectedCountry) {
-                        this.error.set(
-                            `Sory but country "${countryName}" does not exists in our database.`
-                        );
+                        this.router.navigate(['not-found']);
                         return;
                     }
 

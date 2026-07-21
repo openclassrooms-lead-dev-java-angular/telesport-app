@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
     });
     public error = signal('');
     public isLoading = signal(true);
+    private olympicsData: Olympic[] = [];
 
     // contructor
     private olympicService = inject(OlympicService);
@@ -51,6 +52,7 @@ export class HomeComponent implements OnInit {
             )
             .subscribe({
                 next: (data) => {
+                    this.olympicsData = data;
                     this.updateStatitics(data);
                     this.buildPieChart(data);
                 },
@@ -64,7 +66,7 @@ export class HomeComponent implements OnInit {
     }
 
     updateStatitics(data: Olympic[]): void {
-        this.totalCountries.set(data.length);
+        this.totalCountries.set(this.olympicsData.length);
         this.totalJOs.set(
             Array.from(
                 new Set(
@@ -112,6 +114,7 @@ export class HomeComponent implements OnInit {
     }
 
     navigateToCountry(label: string): void {
-        this.router.navigate(['country', label]);
+        const id = this.olympicsData.find((i: Olympic) => i.country === label)?.id;
+        this.router.navigate(['country', id]);
     }
 }
