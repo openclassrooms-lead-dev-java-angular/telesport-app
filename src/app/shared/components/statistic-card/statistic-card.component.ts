@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
     selector: 'app-statistic-card',
@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
     standalone: true
 })
 export class StatisticCardComponent {
-    @Input() cardTitle: string = '';
-    @Input() cardValue: number = 0;
+    cardTitle = input.required<string>();
+    cardValue = input.required<number>();
 }
