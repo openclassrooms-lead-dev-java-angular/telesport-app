@@ -10,6 +10,8 @@ import { LineChartData } from 'src/app/core/models/chart-data.model';
 import { ChartType } from 'src/app/core/enums/chart-type.enum';
 import { CountryStats, Stat } from 'src/app/core/models/statistics.model';
 import { StatisticCardComponent } from "src/app/shared/components/statistic-card/statistic-card.component";
+import { finalize } from 'rxjs';
+import { SpinnerComponent } from "src/app/shared/components/spinner/spinner.component";
 
 @Component({
     selector: 'app-country',
@@ -17,7 +19,8 @@ import { StatisticCardComponent } from "src/app/shared/components/statistic-card
         PageTitleComponent,
         ButtonComponent,
         ChartComponent,
-        StatisticCardComponent
+        StatisticCardComponent,
+        SpinnerComponent
     ],
     templateUrl: './country.component.html',
     styleUrl: './country.component.scss',
@@ -57,6 +60,7 @@ export class CountryComponent implements OnInit {
             lg: 0
         }
     });
+    public isLoading = signal(true);
 
     // constructors
     private route: ActivatedRoute = inject(ActivatedRoute);
@@ -71,17 +75,30 @@ export class CountryComponent implements OnInit {
             return;
         }
 
-        this.olympicService.fetchOlympics().subscribe(data => {
-            const selectedCountry = data.find((olympic: Olympic) => olympic.country === countryName);
+        this.olympicService.fetchOlympics()
+            .pipe(
+                finalize(() => {
+                    this.isLoading.set(false);
+                })
+            )
+            .subscribe({
+                next: (data) => {
+                    const selectedCountry = data.find((olympic: Olympic) => olympic.country === countryName);
 
-            if (!selectedCountry) {
-                this.error.set(`Sory but country "${countryName}" does not exists in our database.`);
-                return;
-            }
+                    if (!selectedCountry) {
+                        this.error.set(`Sory but country "${countryName}" does not exists in our database.`);
+                        return;
+                    }
 
-            this.updateStatistics(selectedCountry);
-            this.buildChart(selectedCountry);
-        })
+                    this.updateStatistics(selectedCountry);
+                    this.buildChart(selectedCountry);
+                },
+                error: (error) => {
+                    this.error.set('Oops! Even champions need a break sometimes.The data failed to load—please try again in a moment.');
+                    console.error(error.message);
+                },
+
+            })
     }
 
     updateStatistics(country: Olympic): void {
