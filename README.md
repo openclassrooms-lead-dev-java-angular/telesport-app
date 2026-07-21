@@ -35,6 +35,8 @@ npm install
 npm run start
 ```
 
+---
+
 ## Code Quality
 
 The project uses linting and formatting tools to ensure clean, consistent, and maintainable code.
@@ -96,6 +98,8 @@ npm run format:check
 # or
 prettier . --check
 ```
+
+---
 
 ## Architecture
 
