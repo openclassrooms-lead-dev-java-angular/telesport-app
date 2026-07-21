@@ -126,37 +126,16 @@ La refactorisation proposée vise à rapprocher l'application des standards Angu
 
 ## 2 Exécution des tests
 
-```bash
-⠋ Generating browser application bundles (phase: setup)...    TypeScript compiler options "target" and "useDefineForClassFields" are set to "ES2022" and "false" respectively by the Angular CLI. To control ECMA version and features use the Browserslist configuration. For more information, see https://angular.dev/tools/cli/build#configuring-browser-compatibility
-    NOTE: You can set the "target" to "ES2022" in the project's tsconfig to remove this warning.
-✔ Browser application bundle generation complete.
+## Tests et robustesse applicative
 
-Error: src/app/app.component.spec.ts:26:16 - error TS2339: Property 'title' does not exist on type 'AppComponent'.
+L'analyse de la suite de tests a mis en évidence plusieurs problèmes de qualité qui impactaient la fiabilité du projet. Plusieurs erreurs de typage ont été détectées, principalement dues à l'utilisation de `any` dans les composants et à l'absence de modèles TypeScript clairement définis. Cette pratique désactive une partie de la vérification statique offerte par TypeScript et peut masquer des erreurs qui ne seront découvertes qu'à l'exécution.
 
-26     expect(app.title).toEqual('olympic-games-starter');
-                  ~~~~~
+Les tests ont également révélé un manque d'alignement entre les fichiers de tests et l'évolution de l'architecture applicative. Lors des refactorings, les tests unitaires doivent être maintenus afin de refléter la nouvelle organisation des composants, services et modèles.
 
+La présence de nombreux `console.log` dans le code montre également un manque de nettoyage avant validation. Ces traces doivent être supprimées pour éviter du bruit lors des phases de debug et garantir une meilleure qualité du code livré.
 
+La correction de ces points passe par un typage strict des données manipulées, la suppression des éléments temporaires de développement et la maintenance régulière des tests afin d'accompagner l'évolution de l'application.
 
-16 07 2026 09:41:07.980:WARN [karma]: No captured browser, open http://localhost:9876/
-16 07 2026 09:41:08.004:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/
-16 07 2026 09:41:08.004:INFO [launcher]: Launching browsers Chrome with concurrency unlimited
-16 07 2026 09:41:08.011:INFO [launcher]: Starting browser Chrome
-16 07 2026 09:41:09.095:INFO [Chrome 150.0.0.0 (Windows 10)]: Connected on socket RhKY9ZWC5uZx17hFAAAB with id 47351365
-16 07 2026 09:41:09.138:WARN [web-server]: 404: /_karma_webpack_/main.js
-Chrome 150.0.0.0 (Windows 10): Executed 0 of 0 SUCCESS (0.007 secs / 0 secs)
-TOTAL: 0 SUCCESS
-```
-
-Erreur TypeScript :
-
-- dans les tests le fichier `app.component.ts` est sensé avoir une propriété `title` mais elle est absente.
-
-Les tests ne sont pas en adéquation avec le code fournis ce qui casserait l'exécution d'une CI/CD lors d'une tentative de déploiement déploiement.
-
----
-
----
 
 ### 3. UI
 
