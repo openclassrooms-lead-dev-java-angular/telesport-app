@@ -12,6 +12,10 @@ describe('PageTitleComponent', () => {
         }).compileComponents();
 
         fixture = TestBed.createComponent(PageTitleComponent);
+
+        fixture.componentRef.setInput('title', 'Countries');
+
+
         component = fixture.componentInstance;
         await fixture.whenStable();
     });

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ɵɵRouterLink } from '@angular/router/testing';
+import { ɵɵRouterLink } from "@angular/router/testing";
 
 @Component({
     selector: 'app-button',

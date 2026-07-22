@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ChartData, ResponsiveChartRatio } from 'src/app/core/models/chart-data.model';
 import { ChartType } from 'src/app/core/enums/chart-type.enum';
-import Chart from 'chart.js/auto';
+import Chart, { ChartEvent } from 'chart.js/auto';
 
 @Component({
     selector: 'app-chart',
@@ -53,21 +53,32 @@ export class ChartComponent implements OnDestroy {
         });
 
         if (this.clicked) {
-            this.chart.options.onClick = (e) => {
-                if (e.native) {
-                    const points = this.chart.getElementsAtEventForMode(
-                        e.native,
-                        'point',
-                        { intersect: true },
-                        true
-                    );
-                    if (points?.length) {
-                        const firstPoint = points[0];
-                        const label = this.chart.data.labels?.[firstPoint.index] as string;
-                        this.clicked.emit(label);
-                    }
-                }
-            };
+            this.chart.options.onClick = (event) => {
+                this.handleChartClick(event);
+            }
+        }
+    }
+
+    handleChartClick(event: ChartEvent) {
+        if (!event.native) {
+            return;
+        }
+
+        const points = this.chart.getElementsAtEventForMode(
+            event.native,
+            'point',
+            { intersect: true },
+            true
+        );
+
+        if (!points?.length) {
+            return;
+        }
+
+        const label = this.chart.data.labels?.[points[0].index];
+
+        if (typeof label === 'string') {
+            this.clicked.emit(label);
         }
     }
 
