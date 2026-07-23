@@ -23,6 +23,29 @@ An Angular application for viewing and comparing Olympic performance data.
 
 ## Launch application
 
+## Prerequisites
+
+### NVM (Node Version Manager)
+
+This project uses a specific version of Node.js that is compatible with Angular. It is recommended that you install **NVM** to easily manage multiple versions of Node on the same machine.
+
+Example of how to install the required version:
+
+```bash
+nvm install 20
+nvm use 20
+```
+
+### NPM (Node Package Manager)
+
+**npm** is installed automatically with Node.js. It allows you to install all the project dependencies defined in the `package.json` file.
+
+Once you have selected the correct version of Node, install the dependencies using:
+
+```bash
+npm install
+```
+
 ### App installation
 
 ```bash
