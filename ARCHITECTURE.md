@@ -164,19 +164,25 @@ Each feature has its own isolated folder.
 ```text
 features
 │
-├── country
-├── home
+├── country-detail
+├── medal-dashboard (home)
 └── not-found
 ```
 
 ---
 
-#### Country
+#### Country detail
 
 Handles country-related information.
 
 ```text
-country
+country-detail
+│
+└── page
+    ├── country-detail.component.html
+    ├── country-detail.component.scss
+    ├── country-detail.component.spec.ts
+    └── country-detail.component.ts
 ```
 
 Responsibilities:
@@ -184,16 +190,21 @@ Responsibilities:
 - display medals by country;
 - show country statistics;
 - display related charts;
-- manage country navigation.
 
 ---
 
-#### Home
+#### Medal-dashboard (home)
 
 The application's home page.
 
 ```text
-home
+medal-dashboard
+│
+└── page
+    ├── medal-dashboard.component.html
+    ├── medal-dashboard.component.scss
+    ├── medal-dashboard.component.spec.ts
+    └── medal-dashboard.component.ts
 ```
 
 Responsibilities:
@@ -210,6 +221,12 @@ Handles unknown routes and missing pages.
 
 ```text
 not-found
+│
+└── page
+    ├── not-found.component.html
+    ├── not-found.component.scss
+    ├── not-found.component.spec.ts
+    └── not-found.component.ts
 ```
 
 Responsibilities:
@@ -229,12 +246,13 @@ These components can be used throughout the application.
 ```text
 shared
 │
-├── button
-├── chart
-├── header
-├── page-title
-├── spinner
-└── statistic-card
+└── components
+    ├── button
+    ├── chart
+    ├── header
+    ├── page-title
+    ├── spinner
+    └── statistic-card
 ```
 
 ---

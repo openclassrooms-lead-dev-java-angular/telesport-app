@@ -137,13 +137,13 @@ For the project architecture, please refer to the file describing the [architect
 
 ## Screenshots
 
-### Home page
+### Medal dashboard (home page)
 
 ![Desktop](./screenshots/readme/home-desktop.png)
 
 ![Mobile](./screenshots/readme/home-mobile.png)
 
-### Country page
+### Country detail page
 
 ![Desktop](./screenshots/readme/country-desktop.png)
 

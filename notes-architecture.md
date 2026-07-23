@@ -155,72 +155,8 @@ flowchart LR
     A[main<br/>Branche stable]
 
     B1[feature/auth]
-    B2[feature/country]
-    B3[feature/dashboard]
-
-    C[develop<br/>Intégration]
-    D[preprod<br/>Recette]
-    E[production<br/>Déploiement]
-
-    B1 --> A
-    B2 --> A
-    B3 --> A
-
-    A --> C
-    C --> D
-    D --> E
-```
-
-- Une stratégie de convention de nommage clarifiera le repository :
-
-Convention de création des branches et des commits
-
-Chaque branche de fonctionnalité (feature) doit obligatoirement être créée à partir de la branche main.
-
-Le nom de la branche doit correspondre au titre de l’User Story (US) associée afin de garantir une traçabilité claire entre le besoin métier et l'implémentation technique.
-
-Exemple :
-
-feature/US-123-add-country-page
-
-La convention de nommage des commits doit reprendre le nom de la branche, suivi du caractère : puis d'une description concise de la modification réalisée.
-
-Format :
-
-nom-de-la-branche: description du changement
-
-Exemple :
-
-US-123-add-country-page: add country participation component
-
-Cette convention permet :
-
-d’identifier rapidement l’origine d’une modification ;
-de faciliter le suivi entre les User Stories, les branches et l’historique Git ;
-d’améliorer la lisibilité des commits lors des revues de code et des recherches dans l’historique.
-
-## 2. Git
-
-### 2.1. Analyse du repository GitHub
-
-L'analyse du repository GitHub met en évidence qu'une seule branche est actuellement présente.
-
-Cette organisation peut convenir pour un projet individuel ou une phase de démarrage, mais elle devient rapidement limitée dans un contexte de développement collaboratif.
-
-Afin d'améliorer la collaboration entre les développeurs, de sécuriser les livraisons et de faciliter le suivi des évolutions, il est recommandé de mettre en place une stratégie de branches adaptée au travail en équipe.
-
-### 2.2. Mise en place de conventions Git
-
-#### Proposition de workflow Git
-
-```mermaid
-flowchart LR
-
-    A[main<br/>Branche stable]
-
-    B1[feature/auth]
-    B2[feature/country]
-    B3[feature/dashboard]
+    B2[feature/country-detail]
+    B3[feature/medal-dashboard]
 
     C[develop<br/>Intégration]
     D[preprod<br/>Recette]
@@ -450,23 +386,27 @@ src
 │   │           └── line-chart.component.scss
 │   │
 │   ├── feature
-│   │   ├── home
-│   │   │   ├── home.component.ts
-│   │   │   ├── home.component.html
-│   │   │   ├── home.component.scss
-│   │   │   └── home.routes.ts
+│   │   ├── medal-dashboard
+│   │   │   └── page
+│   │   │       ├── medal-dashboard.component.ts
+│   │   │       ├── medal-dashboard.component.html
+│   │   │       ├── medal-dashboard.component.scss
+│   │   │       └── medal-dashboard.routes.ts
 │   │   │
-│   │   ├── country
-│   │   │   ├── country.component.ts
-│   │   │   ├── country.component.html
-│   │   │   ├── country.component.scss
-│   │   │   └── country.routes.ts
+│   │   ├── country-detail
+│   │   │   └── page
+│   │   │       ├── country-detail.component.ts
+│   │   │       ├── country-detail.component.html
+│   │   │       ├── country-detail.component.html
+│   │   │       ├── country-detail.component.scss
+│   │   │       └── country-detail.routes.ts
 │   │   │
 │   │   └── not-found
-│   │       ├── not-found.component.ts
-│   │       ├── not-found.component.html
-│   │       ├── not-found.component.scss
-│   │       └── not-found.routes.ts
+│   │       └── page
+│   │           ├── not-found.component.ts
+│   │           ├── not-found.component.html
+│   │           ├── not-found.component.scss
+│   │           └── not-found.routes.ts
 │   ├── app.component.ts
 │   ├── app.component.html
 │   ├── app.component.scss
@@ -519,27 +459,6 @@ Chaque feature possède :
 - ses services spécifiques si nécessaire.
 
 C'est ce qui facilite le lazy loading.
-
-### Evolution possible
-
-Si le projet venait à prendre de l'ampleur, nous pourrions faire évoluer chaque feature ainsi :
-
-```text
-features
-└── country
-    ├── components
-    │   ├── country-header
-    │   └── participation-table
-    │
-    ├── services
-    │
-    ├── models
-    │
-    ├── country.component.ts
-    └── country.routes.ts
-```
-
-Cela permet de conserver tout ce qui concerne une fonctionnalité au même endroit.
 
 ## 4 Upgrade socle applicatif
 
