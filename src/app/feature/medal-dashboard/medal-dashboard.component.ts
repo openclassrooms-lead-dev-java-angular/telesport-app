@@ -49,7 +49,7 @@ export class MedalDashboardComponent implements OnInit {
 
     ngOnInit() {
         this.olympicService
-            .fetchOlympics()
+            .fetchCountries()
             .pipe(
                 finalize(() => {
                     this.isLoading.set(false);
@@ -59,7 +59,7 @@ export class MedalDashboardComponent implements OnInit {
                 next: (data) => {
                     this.olympicsData = data;
                     this.updateStatitics(data);
-                    this.buildPieChart(data);
+                    this.buildPieChartDatas(data);
                 },
                 error: (error) => {
                     this.error.set(
@@ -70,6 +70,11 @@ export class MedalDashboardComponent implements OnInit {
             });
     }
 
+    /**
+     * Set statistics attributes values
+     * 
+     * @param data 
+     */
     private updateStatitics(data: Olympic[]): void {
         this.totalCountries.set(this.olympicsData.length);
         this.totalJOs.set(
@@ -83,7 +88,12 @@ export class MedalDashboardComponent implements OnInit {
         );
     }
 
-    private buildPieChart(data: Olympic[]) {
+    /**
+     * Build pie chart datas
+     * 
+     * @param data 
+     */
+    private buildPieChartDatas(data: Olympic[]) {
         const countries: string[] = data.map((i: Olympic) => i.country);
         const medals: number[][] = data.map((i: Olympic) =>
             i.participations.map((i: Participation) => i.medalsCount)
@@ -118,6 +128,11 @@ export class MedalDashboardComponent implements OnInit {
         });
     }
 
+    /**
+     * Navigation callback for chart click action
+     * 
+     * @param label 
+     */
     public navigateToCountry(label: string): void {
         const id = this.olympicsData.find((i: Olympic) => i.country === label)?.id;
         this.router.navigate(['country', id]);
