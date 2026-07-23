@@ -387,19 +387,21 @@ src
 │   │
 │   ├── feature
 │   │   ├── medal-dashboard
-│   │   │   └── page
-│   │   │       ├── medal-dashboard.component.ts
-│   │   │       ├── medal-dashboard.component.html
-│   │   │       ├── medal-dashboard.component.scss
-│   │   │       └── medal-dashboard.routes.ts
+│   │   │   ├── page
+│   │   │   │   ├── medal-dashboard.component.ts
+│   │   │   │   ├── medal-dashboard.component.html
+│   │   │   │   ├── medal-dashboard.component.scss
+│   │   │   └── services
+│   │   │       └── medal-dashboard.services.ts
 │   │   │
 │   │   ├── country-detail
 │   │   │   └── page
-│   │   │       ├── country-detail.component.ts
-│   │   │       ├── country-detail.component.html
-│   │   │       ├── country-detail.component.html
-│   │   │       ├── country-detail.component.scss
-│   │   │       └── country-detail.routes.ts
+│   │   │   │   ├── country-detail.component.ts
+│   │   │   │   ├── country-detail.component.html
+│   │   │   │   ├── country-detail.component.html
+│   │   │   │   └── country-detail.component.scss
+│   │   │   └── services
+│   │   │       └── country-detail.services.ts
 │   │   │
 │   │   └── not-found
 │   │       └── page

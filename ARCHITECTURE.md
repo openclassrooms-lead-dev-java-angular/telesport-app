@@ -178,11 +178,13 @@ Handles country-related information.
 ```text
 country-detail
 │
-└── page
-    ├── country-detail.component.html
-    ├── country-detail.component.scss
-    ├── country-detail.component.spec.ts
-    └── country-detail.component.ts
+├── page
+│  ├── country-detail.component.html
+│  ├── country-detail.component.scss
+│  ├── country-detail.component.spec.ts
+│  └── country-detail.component.ts
+└── services
+    └── medal-dashboard.service.ts
 ```
 
 Responsibilities:
@@ -201,10 +203,12 @@ The application's home page.
 medal-dashboard
 │
 └── page
-    ├── medal-dashboard.component.html
-    ├── medal-dashboard.component.scss
-    ├── medal-dashboard.component.spec.ts
-    └── medal-dashboard.component.ts
+│   ├── medal-dashboard.component.html
+│   ├── medal-dashboard.component.scss
+│   ├── medal-dashboard.component.spec.ts
+│   └── medal-dashboard.component.ts
+└── services
+    └── medal-dashboard.service.ts
 ```
 
 Responsibilities:
