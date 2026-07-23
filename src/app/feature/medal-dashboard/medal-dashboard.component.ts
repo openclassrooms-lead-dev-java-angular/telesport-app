@@ -12,12 +12,17 @@ import { ChartComponent } from 'src/app/shared/components/chart/chart.component'
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
-    selector: 'app-home',
-    imports: [PageTitleComponent, StatisticCardComponent, ChartComponent, SpinnerComponent],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss',
+    selector: 'app-medal-dashboard',
+    imports: [
+        PageTitleComponent,
+        StatisticCardComponent,
+        ChartComponent,
+        SpinnerComponent
+    ],
+    templateUrl: './medal-dashboard.component.html',
+    styleUrl: './medal-dashboard.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class MedalDashboardComponent implements OnInit {
     // attributes
     protected pageTitle = 'Medals per Country';
     protected totalJOs = signal(0);
