@@ -14,7 +14,7 @@ import { finalize } from 'rxjs';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
-    selector: 'app-country',
+    selector: 'app-country-detail',
     imports: [
         PageTitleComponent,
         ButtonComponent,
@@ -22,11 +22,11 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
         StatisticCardComponent,
         SpinnerComponent,
     ],
-    templateUrl: './country.component.html',
-    styleUrl: './country.component.scss',
+    templateUrl: './country-detail.component.html',
+    styleUrl: './country-detail.component.scss',
     standalone: true,
 })
-export class CountryComponent implements OnInit {
+export class CountryDetailComponent implements OnInit {
     // attributes
     public pageTitle = '';
     private stats: CountryStats = {
@@ -109,7 +109,7 @@ export class CountryComponent implements OnInit {
             });
     }
 
-    updateStatistics(country: Olympic): void {
+    private updateStatistics(country: Olympic): void {
         this.pageTitle = country.country;
         this.medals = country.participations.map((i: Participation) => i.medalsCount) ?? [];
         this.stats.entries.value = country.participations.length ?? 0;
@@ -122,7 +122,7 @@ export class CountryComponent implements OnInit {
         this.stats.athletes.value = nbAthletes.reduce((acc: number, item: number) => acc + item, 0);
     }
 
-    buildChart(country: Olympic) {
+    private buildChart(country: Olympic) {
         const years = country.participations.map((i: Participation) => i.year.toString());
 
         this.chartData.set({

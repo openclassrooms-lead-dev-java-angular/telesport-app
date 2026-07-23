@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CountryComponent } from './country.component';
+import { CountryComponent } from './country-detail.component';
 import { provideRouter } from '@angular/router';
 
 describe('CountryComponent', () => {
