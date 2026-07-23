@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { Olympic } from 'src/app/core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { PageTitleComponent } from 'src/app/shared/components/page-title/page-title.component';
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
@@ -10,6 +9,7 @@ import { Participation } from 'src/app/core/models/participation.model';
 import { ChartType } from 'src/app/core/enums/chart-type.enum';
 import { ChartComponent } from 'src/app/shared/components/chart/chart.component';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { Country } from 'src/app/core/models/country.model';
 
 @Component({
     selector: 'app-medal-dashboard',
@@ -41,7 +41,7 @@ export class MedalDashboardComponent implements OnInit {
     });
     public error = signal('');
     public isLoading = signal(true);
-    private olympicsData: Olympic[] = [];
+    private olympicsData: Country[] = [];
 
     // contructor
     private olympicService = inject(OlympicService);
@@ -75,13 +75,13 @@ export class MedalDashboardComponent implements OnInit {
      * 
      * @param data 
      */
-    private updateStatitics(data: Olympic[]): void {
+    private updateStatitics(data: Country[]): void {
         this.totalCountries.set(this.olympicsData.length);
         this.totalJOs.set(
             Array.from(
                 new Set(
                     data
-                        .map((i: Olympic) => i.participations.map((f: Participation) => f.year))
+                        .map((i: Country) => i.participations.map((f: Participation) => f.year))
                         .flat()
                 )
             ).length
@@ -93,9 +93,9 @@ export class MedalDashboardComponent implements OnInit {
      * 
      * @param data 
      */
-    private buildPieChartDatas(data: Olympic[]) {
-        const countries: string[] = data.map((i: Olympic) => i.country);
-        const medals: number[][] = data.map((i: Olympic) =>
+    private buildPieChartDatas(data: Country[]) {
+        const countries: string[] = data.map((i: Country) => i.country);
+        const medals: number[][] = data.map((i: Country) =>
             i.participations.map((i: Participation) => i.medalsCount)
         );
         const sumOfAllMedalsYears = medals.map((i) =>
@@ -134,7 +134,7 @@ export class MedalDashboardComponent implements OnInit {
      * @param label 
      */
     public navigateToCountry(label: string): void {
-        const id = this.olympicsData.find((i: Olympic) => i.country === label)?.id;
+        const id = this.olympicsData.find((i: Country) => i.country === label)?.id;
         this.router.navigate(['country', id]);
     }
 }

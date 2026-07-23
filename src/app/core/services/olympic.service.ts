@@ -1,8 +1,10 @@
+// src/app/core/services/olympic.service.ts
+
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Olympic } from '../models/olympic.model';
 import { map, Observable } from 'rxjs';
+import { Country } from 'src/app/core/models/country.model';
 
 @Injectable({
     providedIn: 'root',
@@ -17,8 +19,8 @@ export class OlympicService {
      * 
      * @returns Observable
      */
-    fetchCountries(): Observable<Olympic[]> {
-        return this.http.get<Olympic[]>(this.apiUrl);
+    fetchCountries(): Observable<Country[]> {
+        return this.http.get<Country[]>(this.apiUrl);
     }
 
     /**
@@ -27,11 +29,11 @@ export class OlympicService {
      * @param id number
      * @returns Observable
      */
-    fetchCountryById(id: number): Observable<Olympic | undefined> {
+    fetchCountryById(id: number): Observable<Country | undefined> {
         return this.fetchCountries().pipe(
-            map((olympics: Olympic[]) =>
-                olympics
-                    .find((olympic: Olympic) => olympic.id === id)
+            map((countries: Country[]) =>
+                countries
+                    .find((country: Country) => country.id === id)
 
             ));
     }

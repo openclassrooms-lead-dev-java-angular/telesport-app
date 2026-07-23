@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Olympic } from 'src/app/core/models/olympic.model';
 import { Participation } from 'src/app/core/models/participation.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { PageTitleComponent } from 'src/app/shared/components/page-title/page-title.component';
@@ -12,6 +11,7 @@ import { CountryStats, Stat } from 'src/app/core/models/statistics.model';
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
 import { finalize } from 'rxjs';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { Country } from 'src/app/core/models/country.model';
 
 @Component({
     selector: 'app-country-detail',
@@ -110,7 +110,7 @@ export class CountryDetailComponent implements OnInit {
      * 
      * @param country 
      */
-    private updateStatistics(country: Olympic): void {
+    private updateStatistics(country: Country): void {
         this.pageTitle = country.country;
         this.medals = country.participations.map((i: Participation) => i.medalsCount) ?? [];;
         this.stats.entries.value = country.participations.length ?? 0;
@@ -127,7 +127,7 @@ export class CountryDetailComponent implements OnInit {
      * 
      * @param country 
      */
-    private buildChartDatas(country: Olympic) {
+    private buildChartDatas(country: Country): void {
         const years = country.participations.map((i: Participation) => i.year.toString());
 
         this.chartData.set({

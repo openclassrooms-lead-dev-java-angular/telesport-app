@@ -1,8 +1,8 @@
-// src/app/core/models/olympic.model.ts
+// src/app/core/models/country.model.ts
 
 import { Participation } from './participation.model';
 
-export interface Olympic {
+export interface Country {
     id: number;
     country: string;
     participations: Participation[];
