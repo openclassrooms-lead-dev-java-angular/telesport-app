@@ -5,11 +5,11 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 import { PageTitleComponent } from 'src/app/shared/components/page-title/page-title.component';
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
 import { PieChartData } from 'src/app/core/models/chart-data.model';
-import { Participation } from 'src/app/core/models/participation.model';
 import { ChartType } from 'src/app/core/enums/chart-type.enum';
 import { ChartComponent } from 'src/app/shared/components/chart/chart.component';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import { Country } from 'src/app/core/models/country.model';
+import { MedalDashboardService } from 'src/app/feature/medal-dashboard/services/medal-dashboard.service';
 
 @Component({
     selector: 'app-medal-dashboard',
@@ -46,6 +46,7 @@ export class MedalDashboardComponent implements OnInit {
     // contructor
     private olympicService = inject(OlympicService);
     private router = inject(Router);
+    private mdService = inject(MedalDashboardService);
 
     ngOnInit() {
         this.olympicService
@@ -58,8 +59,12 @@ export class MedalDashboardComponent implements OnInit {
             .subscribe({
                 next: (data) => {
                     this.olympicsData = data;
-                    this.updateStatitics(data);
-                    this.buildPieChartDatas(data);
+                    const { totalCountries, totalJOs } = this.mdService.extractStatistics(data);
+
+                    this.totalCountries.set(totalCountries);
+                    this.totalJOs.set(totalJOs);
+
+                    this.chartData.set(this.mdService.buildPieChartDatas(data));
                 },
                 error: (error) => {
                     this.error.set(
@@ -71,70 +76,12 @@ export class MedalDashboardComponent implements OnInit {
     }
 
     /**
-     * Set statistics attributes values
-     * 
-     * @param data 
-     */
-    private updateStatitics(data: Country[]): void {
-        this.totalCountries.set(this.olympicsData.length);
-        this.totalJOs.set(
-            Array.from(
-                new Set(
-                    data
-                        .map((i: Country) => i.participations.map((f: Participation) => f.year))
-                        .flat()
-                )
-            ).length
-        );
-    }
-
-    /**
-     * Build pie chart datas
-     * 
-     * @param data 
-     */
-    private buildPieChartDatas(data: Country[]) {
-        const countries: string[] = data.map((i: Country) => i.country);
-        const medals: number[][] = data.map((i: Country) =>
-            i.participations.map((i: Participation) => i.medalsCount)
-        );
-        const sumOfAllMedalsYears = medals.map((i) =>
-            i.reduce((acc: number, i: number) => acc + i, 0)
-        );
-
-        this.chartData.set({
-            type: ChartType.PIE,
-            labels: countries,
-            datasets: [
-                {
-                    label: 'Medals',
-                    data: sumOfAllMedalsYears,
-                    backgroundColor: [
-                        '#0b868f',
-                        '#adc3de',
-                        '#7a3c53',
-                        '#8f6263',
-                        'orange',
-                        '#94819d',
-                    ],
-                    hoverOffset: 4,
-                },
-            ],
-            responsiveRatio: {
-                sm: 1.5,
-                md: 1.5,
-                lg: 2.5,
-            },
-        });
-    }
-
-    /**
      * Navigation callback for chart click action
      * 
      * @param label 
      */
     public navigateToCountry(label: string): void {
-        const id = this.olympicsData.find((i: Country) => i.country === label)?.id;
+        const id = this.mdService.findCountryIdByName(this.olympicsData, label);
         this.router.navigate(['country', id]);
     }
 }
