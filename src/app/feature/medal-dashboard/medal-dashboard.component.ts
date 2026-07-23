@@ -70,7 +70,7 @@ export class MedalDashboardComponent implements OnInit {
             });
     }
 
-    updateStatitics(data: Olympic[]): void {
+    private updateStatitics(data: Olympic[]): void {
         this.totalCountries.set(this.olympicsData.length);
         this.totalJOs.set(
             Array.from(
@@ -83,7 +83,7 @@ export class MedalDashboardComponent implements OnInit {
         );
     }
 
-    buildPieChart(data: Olympic[]) {
+    private buildPieChart(data: Olympic[]) {
         const countries: string[] = data.map((i: Olympic) => i.country);
         const medals: number[][] = data.map((i: Olympic) =>
             i.participations.map((i: Participation) => i.medalsCount)
@@ -118,7 +118,7 @@ export class MedalDashboardComponent implements OnInit {
         });
     }
 
-    navigateToCountry(label: string): void {
+    public navigateToCountry(label: string): void {
         const id = this.olympicsData.find((i: Olympic) => i.country === label)?.id;
         this.router.navigate(['country', id]);
     }
