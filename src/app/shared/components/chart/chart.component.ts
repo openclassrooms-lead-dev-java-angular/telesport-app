@@ -34,7 +34,7 @@ export class ChartComponent implements OnDestroy {
         });
     }
 
-    createChart(): void {
+    private createChart(): void {
         if (!this.canvas) {
             return;
         }
@@ -59,7 +59,7 @@ export class ChartComponent implements OnDestroy {
         }
     }
 
-    handleChartClick(event: ChartEvent) {
+    private handleChartClick(event: ChartEvent) {
         if (!event.native) {
             return;
         }
@@ -82,7 +82,7 @@ export class ChartComponent implements OnDestroy {
         }
     }
 
-    getAspectRatio(responsiveRatio: ResponsiveChartRatio | undefined): number {
+    private getAspectRatio(responsiveRatio: ResponsiveChartRatio | undefined): number {
         if (window.innerWidth <= 767) {
             return responsiveRatio?.sm || 1;
         }
