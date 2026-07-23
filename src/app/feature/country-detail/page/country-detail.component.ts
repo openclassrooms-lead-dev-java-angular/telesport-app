@@ -10,7 +10,7 @@ import { CountryStats, Stat } from 'src/app/core/models/statistics.model';
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
 import { finalize } from 'rxjs';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
-import { CountryDetailService } from './services/country-detail.service';
+import { CountryDetailService } from 'src/app/feature/country-detail/services/country-detail.service';
 
 @Component({
     selector: 'app-country-detail',
