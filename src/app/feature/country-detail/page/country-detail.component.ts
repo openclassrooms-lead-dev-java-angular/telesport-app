@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Participation } from 'src/app/core/models/participation.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { PageTitleComponent } from 'src/app/shared/components/page-title/page-title.component';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
@@ -11,7 +10,7 @@ import { CountryStats, Stat } from 'src/app/core/models/statistics.model';
 import { StatisticCardComponent } from 'src/app/shared/components/statistic-card/statistic-card.component';
 import { finalize } from 'rxjs';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
-import { Country } from 'src/app/core/models/country.model';
+import { CountryDetailService } from './services/country-detail.service';
 
 @Component({
     selector: 'app-country-detail',
@@ -67,6 +66,7 @@ export class CountryDetailComponent implements OnInit {
     private olympicService = inject(OlympicService);
     private route: ActivatedRoute = inject(ActivatedRoute);
     private router = inject(Router);
+    private cdService = inject(CountryDetailService);
 
     ngOnInit(): void {
         let countryId: number | null = null;
@@ -93,8 +93,16 @@ export class CountryDetailComponent implements OnInit {
                         return;
                     }
 
-                    this.updateStatistics(data);
-                    this.buildChartDatas(data);
+                    this.pageTitle = data.country;
+                    const medals = this.cdService.buildMedals(data);
+
+                    const { entries, athletes, medalsCount } = this.cdService.buildStatistics(data, medals);
+
+                    this.stats.entries.value = entries;
+                    this.stats.medals.value = medalsCount;
+                    this.stats.athletes.value = athletes;
+
+                    this.chartData.set(this.cdService.buildChartData(data, medals));
                 },
                 error: (error) => {
                     this.error.set(
@@ -103,49 +111,6 @@ export class CountryDetailComponent implements OnInit {
                     console.error(error.message);
                 },
             });
-    }
-
-    /**
-     * Set statistics values arttributes
-     * 
-     * @param country 
-     */
-    private updateStatistics(country: Country): void {
-        this.pageTitle = country.country;
-        this.medals = country.participations.map((i: Participation) => i.medalsCount) ?? [];;
-        this.stats.entries.value = country.participations.length ?? 0;
-        this.stats.medals.value = this.medals.reduce((acc: number, item: number) => acc + item, 0);
-
-        const nbAthletes: number[] = country.participations.map(
-            (i: Participation) => i.athleteCount
-        );
-        this.stats.athletes.value = nbAthletes.reduce((acc: number, item: number) => acc + item, 0);
-    }
-
-    /**
-     * Build datas for chart
-     * 
-     * @param country 
-     */
-    private buildChartDatas(country: Country): void {
-        const years = country.participations.map((i: Participation) => i.year.toString());
-
-        this.chartData.set({
-            type: ChartType.LINE,
-            labels: years,
-            datasets: [
-                {
-                    label: 'medals',
-                    data: this.medals,
-                    backgroundColor: '#0b868f',
-                },
-            ],
-            responsiveRatio: {
-                sm: 2,
-                md: 2,
-                lg: 2.5,
-            },
-        });
     }
 
     /**
