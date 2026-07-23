@@ -80,7 +80,7 @@ export class CountryDetailComponent implements OnInit {
         }
 
         this.olympicService
-            .fetchOlympics()
+            .fetchCountryById(countryId)
             .pipe(
                 finalize(() => {
                     this.isLoading.set(false);
@@ -88,17 +88,13 @@ export class CountryDetailComponent implements OnInit {
             )
             .subscribe({
                 next: (data) => {
-                    const selectedCountry = data.find(
-                        (olympic: Olympic) => olympic.id === countryId
-                    );
-
-                    if (!selectedCountry) {
+                    if (!data) {
                         this.router.navigate(['not-found']);
                         return;
                     }
 
-                    this.updateStatistics(selectedCountry);
-                    this.buildChart(selectedCountry);
+                    this.updateStatistics(data);
+                    this.buildChartDatas(data);
                 },
                 error: (error) => {
                     this.error.set(
@@ -109,11 +105,15 @@ export class CountryDetailComponent implements OnInit {
             });
     }
 
+    /**
+     * Set statistics values arttributes
+     * 
+     * @param country 
+     */
     private updateStatistics(country: Olympic): void {
         this.pageTitle = country.country;
-        this.medals = country.participations.map((i: Participation) => i.medalsCount) ?? [];
+        this.medals = country.participations.map((i: Participation) => i.medalsCount) ?? [];;
         this.stats.entries.value = country.participations.length ?? 0;
-
         this.stats.medals.value = this.medals.reduce((acc: number, item: number) => acc + item, 0);
 
         const nbAthletes: number[] = country.participations.map(
@@ -122,7 +122,12 @@ export class CountryDetailComponent implements OnInit {
         this.stats.athletes.value = nbAthletes.reduce((acc: number, item: number) => acc + item, 0);
     }
 
-    private buildChart(country: Olympic) {
+    /**
+     * Build datas for chart
+     * 
+     * @param country 
+     */
+    private buildChartDatas(country: Olympic) {
         const years = country.participations.map((i: Participation) => i.year.toString());
 
         this.chartData.set({
@@ -143,6 +148,11 @@ export class CountryDetailComponent implements OnInit {
         });
     }
 
+    /**
+     * Transform stats object to array
+     * 
+     * @returns Stat[]
+     */
     public statsList(): Stat[] {
         return Object.values(this.stats);
     }
