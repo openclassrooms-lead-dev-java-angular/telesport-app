@@ -34,6 +34,11 @@ export class ChartComponent implements OnDestroy {
         });
     }
 
+    /**
+     * Creates the chart
+     * 
+     * @returns void
+     */
     private createChart(): void {
         if (!this.canvas) {
             return;
@@ -59,6 +64,12 @@ export class ChartComponent implements OnDestroy {
         }
     }
 
+    /**
+     * Set up the click event
+     * 
+     * @param event
+     * @returns void
+     */
     private handleChartClick(event: ChartEvent) {
         if (!event.native) {
             return;
@@ -82,6 +93,11 @@ export class ChartComponent implements OnDestroy {
         }
     }
 
+    /**
+     * Update chart aspect ratio 
+     * @param responsiveRatio 
+     * @returns number
+     */
     private getAspectRatio(responsiveRatio: ResponsiveChartRatio | undefined): number {
         if (window.innerWidth <= 767) {
             return responsiveRatio?.sm || 1;
